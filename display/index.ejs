@@ -1,0 +1,13 @@
+<%- include('util_layout/header.ejs') %>
+<%- include('util_layout/nav.ejs') %>
+
+<% if (APIData.length == 0) {%>
+    <h1>DATA IS NULL</h1>
+<% }else{ %>
+        <% APIData.forEach(element => {%>
+            <ul>
+                <li><%= element.name %></li>
+                <li><%= element.bounty %></li>
+            </ul>
+        <%}) } %>
+<%- include('util_layout/footer.ejs') %>

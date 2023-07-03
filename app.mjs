@@ -1,45 +1,7 @@
-// import http from 'http'
-// import fs from 'fs'
-// function renderHTML (path , res) {
-//     fs.readFile(path , (err , data) => {
-//         function succesfull () {
-//             res.write(data);
-//         };
-//         function error () {
-//             res.writeHead(404);
-//             res.write('error file not found');
-//         };
-//         err ? error () : succesfull();
-//         res.end()
-//     });
-// };
-// http
-//     .createServer((req , res) => {
-//         res.writeHead(200 , {
-//             'Content-Type' : 'text/html',
-//         })
-//         const url = req.url;
-//         switch (url) {
-//             case '/about' : renderHTML('about.html' , res)
-//                 break;
-//             case '/home' : renderHTML('home.html' ,res)
-//                 break;
-//             default :
-//                 res.writeHead(404);
-//                 res.write('error not found')
-//         }
-//     })
-//     .listen(3000 , () => {
-//         console.log('server is listen in port 3000')
-//     })
-
-
-
-
-
 import express from 'express'
 const app = express()
 const port = 3000
+
 //<<< __filname dan __dirname tidak bisa diakses di js es6
 import path from 'path';
 import { fileURLToPath } from 'url';
@@ -49,40 +11,60 @@ const __dirname = path.dirname(__filename);
 // OR THIS
 const relativeRoute = path.join(path.join(process.cwd()));
 //>>>Gunakan untuk mengakses __filname dan __dirname di js es 6 
-
-
 // RQUEST => YANG DIMINTA
 // RESPONSE => YANG DIKEMBALIKAN
 
-function createPage (root , source) {
-  app.get(root, (req, res) => {
-    res.send(source)
-  })
-}
+
+// APLICATION LEVEL MIDDLEWARE
+
+app.use((req, res, next) => {
+  console.log('Time:', Date.now())
+  next()
+  // JIKA TIDAK DITAMBAHKAN NEXT() HALAMAN AKAN HANGGING
+})
+
+
+const APIData = [
+  {
+    name : 'Roger',
+    bounty : 4_269_000
+  },{
+    name : 'Marshal teach',
+    bounty : 2_820_000
+  },{
+    name : "Zoro",
+    bounty : 1_500_000
+  },{
+    name : 'Monkey D',
+    bounty : 3_000_000
+  }
+]
+
+
+//CONFIGURE EJS
+
+//<<<< UNTUK MENGATUR TIPE VIEW ENGINE
+app.set('view engine' , 'ejs');
+//>>>>
+
+//<<<< UNTUK MENGATUR DIREKTORI REALATIF PADA FILE VIEW
+app.set('views' , __dirname + '/display')
+//>>>>
 
 app.get('/' , (req , res) => {
-  res.sendFile('./index.html' , {root: __dirname})
+  res.render('index' , { 
+    titel : 'HOMEEXAPLE' ,
+    APIData})
 })
 
 app.get('/about' , (req , res) => {
-  res.sendFile('./about.html' , {root: relativeRoute})
+  res.render('about' ,{titel : 'ABOUTPAGE'})
 })
 
-app.get('/contact' , (req , res) => {
-  res.sendFile('./contact.html' , {root: __dirname})
+app.get('/contact' , (_req , res) => {
+  res.render('contact' , {titel : 'CONTACTIONAL '})
+
 })
-
-//<<<<< ROUTE DENGAN METODHE GET (MENULIS DI URL)
-// app.get('/home', (req, res) => {
-//   // res.json({
-//   //   name: 'nopal',
-//   //   quote: 'bakso kontol'
-//   // })
-
-//   // res.send('Hello World!')
-//   res.sendFile('./home.html' , { root: __dirname })
-// })
-//>>>>>
 
 // HALAMAN YANG DIJALANKAN JIKA REQUES ROUTE TIDAK ADA
 app.use('/' , (req ,res) => {
@@ -96,3 +78,4 @@ app.use('/' , (req ,res) => {
 app.listen(port, () => {
   console.log(`server ready in http://localhost:${port}`)
 })
+
