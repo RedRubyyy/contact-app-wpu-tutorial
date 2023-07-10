@@ -1,13 +1,34 @@
 <%- include('util_layout/header.ejs') %>
 <%- include('util_layout/nav.ejs') %>
+<% if(typeof message != "undefined" && message != "Succes sending data") { %>
+  <div class="alert alert-danger" role="alert"><%= message %><a href="/contact" class="fw-bold danger"> CONTACT LIST</a></div>
+<% } 
+   if (typeof message != "undefined" && message == "Succes sending data") {%>
+  <div class="alert alert-success" role="alert"><%= message %><a href="/contact" class="fw-bold"> CONTACT LIST</a></div>
+<% } %>
 
-<% if (APIData.length == 0) {%>
-    <h1>DATA IS NULL</h1>
-<% }else{ %>
-        <% APIData.forEach(element => {%>
-            <ul>
-                <li><%= element.name %></li>
-                <li><%= element.bounty %></li>
-            </ul>
-        <%}) } %>
+  <div class="container" style="max-width: 700px;">
+    <h2 class="fw-bold fs-1 ">WELLCOME TO MY HOME PAGE</h2>
+    <h2 class="fw-light fs-1">ADD CONTACT LIST</h2>
+    <form method="post" action="/">
+        <div class="mb-3">
+            <label for="name" class="form-label">Name | Frist name</label>
+            <input type="text" class="form-control" id="name" name="name" required>
+          </div>
+        <div class="mb-3">
+            <label for="email" class="form-label">Email address</label>
+            <input type="email" class="form-control" id="email" name="email">
+          </div>
+        <div class="mb-3">
+          <label for="notlp" class="form-label">No Tlp</label>
+          <input type="text" class="form-control" id="notlp" name="notlp" required>
+        </div>
+        <div class="mb-3 w-100">
+            <button type="submit" class="btn btn-primary px-5">Submit</button>
+        </div>
+
+    </form>
+</div>
+
+
 <%- include('util_layout/footer.ejs') %>

@@ -1,0 +1,25 @@
+<%- include('util_layout/header') %>
+<% if (!data) { %>
+  <div class="alert alert-danger" role="alert">
+    CONTACT NOT FOUND <a href="/contact" class="alert-link">BACK</a>
+  </div>
+<% } else { %>
+ 
+<div class="container mt-3">
+    <div class="row">
+        <div class="col-md-8">
+            <h2>DETAIL CONTACT</h2>
+            <div class="card" style="width: 18rem;">
+                <div class="card-body">
+                  <h5 class="card-title"><%= data.name %></h5>
+                  <h6 class="card-subtitle mb-2 text-muted"><%= data.notlp %></h6>
+                  <p class="card-text"><%= data.email %></p>
+                  <p class="card-text"><%= data.code %></p>
+                  <a href="/contact" class="card-link">BACK</a>
+                </div>
+              </div>
+        </div>
+    </div>
+</div>
+  <% } %>
+<%- include('util_layout/footer') %>

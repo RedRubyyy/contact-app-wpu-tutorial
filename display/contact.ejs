@@ -1,5 +1,37 @@
 <%- include('util_layout/header') %>
 <%- include('util_layout/nav') %>
-    <p>my contact ? keppooo</p>
-</body>
-</html>
+
+
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">NAME</th>
+      <th scope="col">NO. Telp</th>
+      <th scope="col">Email</th>
+    </tr>
+  </thead>
+  <tbody>
+
+  <% if (datas.length == 0) { %>
+    <tr>
+      <td colspan="4">
+        <div class="alert alert-danger" role="alert">DATA NOT FOUND <a href="/">ADD LIST</a></div>
+      </td>
+    </tr>
+  <% } %>
+
+  <% datas.forEach((data , index) => {%>
+    <tr style="vertical-align: middle;">
+      <th scope="row"><%= index + 1 %></th>
+      <td> <%= data.name %> </td>
+      <td> <%= data.notlp %> </td>
+      <td>
+        <a href="/contact/<%=data.code%>" class="btn btn-primary">DETAIL</a> 
+      </td>
+    </tr>
+  <% }) %>
+  </tbody>
+</table>
+
+<%- include('util_layout/footer.ejs') %>
