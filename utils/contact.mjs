@@ -5,7 +5,7 @@ const
 if( !fs.existsSync(folderPath) ) 
 { fs.mkdirSync(folderPath) }
 
-if ( !fs.existsSync(filePath) || fs.readFileSync(filePath , 'utf-8') == '' ) 
+if ( !fs.existsSync(filePath) || fs.readFileSync(filePath , 'utf-8') == "" ) 
 { fs.writeFileSync(filePath , '[]' , 'utf-8') }
 
 export const loadDatas = () =>  {
@@ -37,7 +37,6 @@ function randomCode ()  {
     {randomCode()}
     else {return code.join('')}
 }
-console.log(randomCode())
 
 export const addDatas = (data) => {
     const fileReader = loadDatas()

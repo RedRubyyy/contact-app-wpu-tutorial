@@ -1,10 +1,10 @@
 <%- include('util_layout/header.ejs') %>
 <%- include('util_layout/nav.ejs') %>
-<% if(typeof message != "undefined" && message != "Succes sending data") { %>
-  <div class="alert alert-danger" role="alert"><%= message %><a href="/contact" class="fw-bold danger"> CONTACT LIST</a></div>
-<% } 
-   if (typeof message != "undefined" && message == "Succes sending data") {%>
-  <div class="alert alert-success" role="alert"><%= message %><a href="/contact" class="fw-bold"> CONTACT LIST</a></div>
+
+<% if (msg.length != 0) { %>
+  <div class="alert alert-<%= msg == "Successfully sending data" ? "success" : "danger"  %>" role="alert">
+    <%= msg %><a href="/contact" class="fw-bold"> CONTACT LIST</a>
+  </div>
 <% } %>
 
   <div class="container" style="max-width: 700px;">

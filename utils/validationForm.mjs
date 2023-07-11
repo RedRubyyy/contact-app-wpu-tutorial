@@ -1,15 +1,28 @@
 import validator from 'validator';
 
 export const validationForm = (body) => {
-    const {email , notlp} = body
-    const email_val = validator.isEmail(email)
-    const notlp_val = validator.isMobilePhone(notlp , "id-ID")
-    let message =  "Succes sending data";
-    email_val === true ? message += "" : message = "Email not valid";
-    notlp_val === true ? message += "" : message = "Number not valid";
+    let message = [];
+    const {email , notlp} = body;
+// VALIDATION EMAIL
+    (function () {
+        validator.isMobilePhone(notlp , 'id-ID') == true ?
+        "escape" :
+        message = ["Phone number not valid"];
+    }());
+// VALIDATION NUMBER PHONE
+    (function () {
+        validator.isEmail(email) == true ?
+        "escape" :
+        message.push("Email not Valid");
+    }());
+// LAST VALIDATION AND CREATE MESSAGE
+    message.length == 0 ? 
+    message = ["Successfully sending data"] 
+    : "escape";
+// RETURN MESSAGE
     return {
-        email : email_val,
-        notlp : notlp_val,
-        message : message
-    }
+        email : validator.isEmail(email),
+        notlp : validator.isMobilePhone(notlp , 'id-ID'),
+        message : message.join(' and ')
+    };
 };
