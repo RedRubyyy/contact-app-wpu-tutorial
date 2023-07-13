@@ -1,0 +1,41 @@
+<%- include('util_layout/header') %>
+
+<div class="container mx-auto" 
+    style="max-width: 900px;">
+
+    <form method="post" action="/contact/update" class="mt-5  p-5" name="oldData"
+        style="border-radius: 20px; background: #d6d6d6;">
+        <h1 class="fs-2 fw-light mb-3">UNIQCODE <%= data.code  %></h1>
+        
+        <!-- INPUT HIDDEN OLD DATA -->
+            <input type="hidden" name="oldName" class="d-none" readonly value="<%= data.oldName || data.name  %>">
+            <input type="hidden" name="oldEmail" class="d-none" readonly value="<%= data.oldEmail || data.email  %>">
+            <input type="hidden" name="oldNotlp" class="d-none" readonly value="<%= data.oldNotlp || data.notlp  %>">   
+        <!-- END INPUT HIDDEN OLD DATA -->
+
+        <div class="mb-3 me-5" style="width: 500px;">
+            <label for="name" class="form-label">Name | Frist name</label>
+            <input type="text" class="form-control" id="name" name="name" required value="<%= data.name %>">
+        </div>
+
+        <div class="mb-3 me-5" style="width: 500px;">
+            <label for="email" class="form-label">Email address</label>
+            <input type="email" class="form-control" id="email" name="email" value="<%= data.email %>">
+        </div>
+
+        <div class="mb-3 me-5" style="width: 500px;">
+          <label for="notlp" class="form-label">No Tlp</label>
+          <input type="text" class="form-control" id="notlp" name="notlp" required value="<%= data.notlp  %>">
+        </div>
+        <input type="hidden" name="code" value="<%= data.code  %>">
+        <div class="mb-3 w-100 d-flex">
+            <button type="submit" class="btn btn-primary px-5">Submit</button>
+            <a href="/contact/detail/<%= data.code  %>" role="button" class="ms-3 btn btn-danger">BACK</a>
+        </div>
+    <% if (msg.length != 0) { %>
+        <div class="alert alert-<%= msg == `Data code ${data.code} berhasil diubah` ? 'success' : 'danger'  %> fw-bold" role="alert"><%= msg %></div>
+    <% } %>
+    </form>
+</div>
+
+<%- include('util_layout/footer') %>

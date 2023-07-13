@@ -12,14 +12,22 @@
             <div class="card" style="width: 18rem;">
                 <div class="card-body">
                   <h5 class="card-title"><%= data.name %></h5>
-                  <h6 class="card-subtitle mb-2 text-muted"><%= data.notlp %></h6>
-                  <p class="card-text"><%= data.email %></p>
-                  <p class="card-text"><%= data.code %></p>
-                  <a href="/contact" class="card-link">BACK</a>
+                  <h6 class="card-subtitle mb-3 text-muted"><%= data.email %></h6>
+                  <p class="card-text">CONTACT : <%= data.notlp %></p>
+                  <p class="card-text fw-normal text-light bg-success p-1 fs-4" style="width: fit-content;"> UNIQCODE : <%= data.code %></p>
+                  <div class="d-flex flex-column" style="width: fit-content;">
+                    <div class="d-flex justify-content-between" style="width: fit-content;">
+                      <a href="/contact/edit/<%=data.code%>" class="btn btn-primary ">EDIT DATA</a>
+                      <a href="/contact/delete/<%=data.code%>" class="btn btn-danger ms-2" onclick="return confirm('delete contact dengan code <%= data.code%>')">DELETE DATA</a>
+                    </div>
+                    <a href="/contact" class="btn btn-secondary text-light mt-2">BACK</a>
+                  </div>
+
                 </div>
-              </div>
+            </div>
         </div>
     </div>
+
 </div>
   <% } %>
-<%- include('util_layout/footer') %>
+  <%- include('util_layout/footer') %>

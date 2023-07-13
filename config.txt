@@ -1,3 +1,0 @@
-<% if(typeof message != "undefined" && message != "Succes sending data") { %>
-  <div class="alert alert-danger" role="alert"><%= message %><a href="/contact" class="fw-bold danger"> CONTACT LIST</a></div>
-<% } 
